@@ -1,0 +1,736 @@
+openapi: 3.0.0
+info:
+  title: Api rest for kuantaz-api
+  description: Api para que permite resolver el desafio para la empresa Kuantaz.
+  contact:
+    email: luis.torres.net@gmail.com
+  version: 1.0.0
+servers:
+- url: https://localhost:8080/rest/kuantaz-api/v1.0
+  description: server development.
+tags:
+- name: institution
+  description: institution api.
+- name: proyect
+  description: proyect api.
+- name: user
+  description: user api.
+paths:
+  /institution:
+    post:
+      tags:
+      - institution
+      summary: Agrega una nueva institución
+      description: Agrega una nueva institución
+      operationId: add_institution
+      requestBody:
+        description: Crea una nueva institución
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestInstitutionAdd'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+    get:
+      tags:
+        - institution
+      summary: Lista instituciones
+      description: Lista instituciones
+      operationId: get_institution
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+    put:
+      tags:
+        - institution
+      summary: Actualiza una institución existente
+      description: Actualiza una institución existente
+      operationId: update_institution
+      requestBody:
+        description: Actualiza una institución existente
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestInstitutionUpd'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+  /institution/{institutionId}:
+    get:
+      tags:
+      - institution
+      summary: Busca una institución por ID
+      description: Busca una institución por ID
+      operationId: get_institution_by_id
+      parameters:
+      - name: institutionId
+        in: path
+        description: Busca una institución por ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+    delete:
+      tags:
+        - institution
+      summary: Elimina una institución
+      description: Elimina una institución
+      operationId: delete_institution
+      parameters:
+        - name: institutionId
+          in: path
+          description: Institution id to delete
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+  /institution/withAddress:
+    get:
+      tags:
+        - institution
+      summary: Lista instituciones con la direccion de google maps y la abreviacion del nombre
+      description: Lista instituciones con la direccion de google maps y la abreviacion de los 3 primeros caracteres del nombre
+      operationId: get_institution_with_address
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+  /institution/findProjectAndResponsible/{institutionId}:
+    get:
+      tags:
+      - institution
+      summary: Busca una institución por ID
+      description: Busca una institución por ID
+      operationId: get_institution_by_project_responsible
+      parameters:
+      - name: institutionId
+        in: path
+        description: Busca una institución por ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+      x-openapi-router-controller: swagger_server.controllers.institution_controller.InstitutionView
+  /user:
+    get:
+      tags:
+        - user
+      summary: Lista users
+      description: Lista users
+      operationId: get_user
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+      x-openapi-router-controller: swagger_server.controllers.user_controller.UserView
+  /user/findByRut/{userRut}:
+    get:
+      tags:
+      - user
+      summary: Lista users by Rut
+      description: Lista users by Rut
+      operationId: get_user_by_rut
+      parameters:
+      - name: userRut
+        in: path
+        description: Lista users by Rut
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+      x-openapi-router-controller: swagger_server.controllers.user_controller.UserView
+  /proyect:
+    get:
+      tags:
+      - proyect
+      summary: Lista proyectos
+      description: Lista proyectos
+      operationId: get_proyect
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+      x-openapi-router-controller: swagger_server.controllers.proyect_controller.ProyectView
+  /proyect/dateToFinish:
+    get:
+      tags:
+        - proyect
+      summary: Lista proyectos
+      description: Lista proyectos
+      operationId: get_proyect_date_to_finish
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+      x-openapi-router-controller: swagger_server.controllers.proyect_controller.ProyectView
+components:
+  schemas:
+    RequestInstitutionAdd:
+      required:
+      - address
+      - createdUser
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: Platzi
+        description:
+          type: string
+          example: Educación continua
+        address:
+          type: string
+          example: Colombia - Bogota
+        createdUser:
+          type: string
+          example: admin
+    ResponseInstitution:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseInstitutionData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          name: Platzi
+          description: Educación continua
+          address: Colombia - Bogota
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+    ResponseInstitutionData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Platzi
+        description:
+          type: string
+          example: Educación continua
+        address:
+          type: string
+          example: Colombia - Bogota
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+    Response400:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "-1"
+        message:
+          type: string
+          example: Hubo problemas en el proceso
+    RequestInstitutionUpd:
+      required:
+      - address
+      - description
+      - id
+      - name
+      - updatedUser
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Platzi
+        description:
+          type: string
+          example: Educación continua
+        address:
+          type: string
+          example: Colombia - Bogota
+        updatedUser:
+          type: string
+          example: admin
+    ResponseProjectAndResponsible:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseProjectAndResponsibleData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          name: Platzi
+          description: Educación continua
+          address: Colombia - Bogota
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+          detail:
+          - id: 1
+            name: Proyecto de seguros vida
+            description: Proyecto para la creacion de app para seguros de vida
+            responsible: Luis Torres
+    ResponseProjectAndResponsibleData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Platzi
+        description:
+          type: string
+          example: Educación continua
+        address:
+          type: string
+          example: Colombia - Bogota
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+        proyects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseProjectAndResponsibleDetail'
+    ResponseProjectAndResponsibleDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Curso Python
+        description:
+          type: string
+          example: Proyecto aprende a programar en Python
+        responsible:
+          type: string
+          example: Luis Torres
+    ResponseProyect:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseProyectData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          name: Proyecto aprende a programar en Python
+          description: Facilita el aprendizaje de los adolecentes
+          responsible: Luis Torres
+          startDate: 01/02/2023
+          endDate: 20/02/2023
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+    ResponseProyectData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Proyecto aprende a programar en Python
+        description:
+          type: string
+          example: Facilita el aprendizaje de los adolecentes
+        responsible:
+          type: string
+          example: Luis Torres
+        startDate:
+          type: string
+          example: 01/02/2023
+        endDate:
+          type: string
+          example: 20/02/2023
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+    ResponseProyectDateToFinish:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseProyectDateToFinishData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          name: Proyecto aprende a programar en Python
+          description: Facilita el aprendizaje de los adolecentes
+          responsible: Luis Torres
+          dateFinish: 20
+          startDate: 01/02/2023
+          endDate: 20/02/2023
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+    ResponseProyectDateToFinishData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Proyecto aprende a programar en Python
+        description:
+          type: string
+          example: Facilita el aprendizaje de los adolecentes
+        responsible:
+          type: string
+          example: Luis Torres
+        dateFinish:
+          type: integer
+          example: 20
+        startDate:
+          type: string
+          example: 01/02/2023
+        endDate:
+          type: string
+          example: 20/02/2023
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+    ResponseUser:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseUserData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          firstName: Luis
+          lastName: Torres
+          rut: 9999999999
+          birthDate: 01/02/1989
+          position: Developer
+          age: 33
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+    ResponseUserData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: Luis
+        lastName:
+          type: string
+          example: Torres
+        rut:
+          type: string
+          example: "9999999999"
+        birthDate:
+          type: string
+          example: 01/02/1989
+        position:
+          type: string
+          example: Developer
+        age:
+          type: integer
+          example: 33
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+    ResponseUserByRut:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "0"
+        message:
+          type: string
+          example: proceso exitoso
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseUserByRutData'
+      example:
+        code: 0
+        message: proceso satisfactorio
+        data:
+        - id: 1
+          firstName: Luis
+          lastName: Torres
+          rut: 9999999999
+          birthDate: 01/02/1989
+          position: Developer
+          age: 33
+          createdUser: admin
+          createdAt: 25/01/2023
+          updatedUser: admin
+          updatedAt: 25/01/2023
+          status: A
+          proyects:
+          - id: 1
+            name: Curso Python
+            description: Proyecto aprende a programar en Python
+    ResponseUserByRutData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: Luis
+        lastName:
+          type: string
+          example: Torres
+        rut:
+          type: string
+          example: "9999999999"
+        birthDate:
+          type: string
+          example: 01/02/1989
+        position:
+          type: string
+          example: Developer
+        age:
+          type: integer
+          example: 33
+        createdUser:
+          type: string
+          example: admin
+        createdAt:
+          type: string
+          example: 25/01/2023
+        updatedUser:
+          type: string
+          example: admin
+        updatedAt:
+          type: string
+          example: 25/01/2023
+        status:
+          type: string
+          example: A
+        proyects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseUserByRutDetail'
+    ResponseUserByRutDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Curso Python
+        description:
+          type: string
+          example: Proyecto aprende a programar en Python
+    inline_response_200:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseInstitution'
+      - $ref: '#/components/schemas/Response400'
+    inline_response_200_1:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseProjectAndResponsible'
+      - $ref: '#/components/schemas/Response400'
+    inline_response_200_2:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseProyect'
+      - $ref: '#/components/schemas/Response400'
+    inline_response_200_3:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseProyectDateToFinish'
+      - $ref: '#/components/schemas/Response400'
+    inline_response_200_4:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseUser'
+      - $ref: '#/components/schemas/Response400'
+    inline_response_200_5:
+      oneOf:
+      - $ref: '#/components/schemas/ResponseUserByRut'
+      - $ref: '#/components/schemas/Response400'

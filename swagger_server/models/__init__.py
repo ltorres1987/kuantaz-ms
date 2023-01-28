@@ -1,0 +1,28 @@
+# coding: utf-8
+
+# flake8: noqa
+from __future__ import absolute_import
+# import models into model package
+from swagger_server.models.inline_response200 import InlineResponse200
+from swagger_server.models.inline_response2001 import InlineResponse2001
+from swagger_server.models.inline_response2002 import InlineResponse2002
+from swagger_server.models.inline_response2003 import InlineResponse2003
+from swagger_server.models.inline_response2004 import InlineResponse2004
+from swagger_server.models.inline_response2005 import InlineResponse2005
+from swagger_server.models.request_institution_add import RequestInstitutionAdd
+from swagger_server.models.request_institution_upd import RequestInstitutionUpd
+from swagger_server.models.response400 import Response400
+from swagger_server.models.response_institution import ResponseInstitution
+from swagger_server.models.response_institution_data import ResponseInstitutionData
+from swagger_server.models.response_project_and_responsible import ResponseProjectAndResponsible
+from swagger_server.models.response_project_and_responsible_data import ResponseProjectAndResponsibleData
+from swagger_server.models.response_project_and_responsible_detail import ResponseProjectAndResponsibleDetail
+from swagger_server.models.response_proyect import ResponseProyect
+from swagger_server.models.response_proyect_data import ResponseProyectData
+from swagger_server.models.response_proyect_date_to_finish import ResponseProyectDateToFinish
+from swagger_server.models.response_proyect_date_to_finish_data import ResponseProyectDateToFinishData
+from swagger_server.models.response_user import ResponseUser
+from swagger_server.models.response_user_by_rut import ResponseUserByRut
+from swagger_server.models.response_user_by_rut_data import ResponseUserByRutData
+from swagger_server.models.response_user_by_rut_detail import ResponseUserByRutDetail
+from swagger_server.models.response_user_data import ResponseUserData
