@@ -64,7 +64,5 @@ target/
 .ipynb_checkpoints
 
 # Environment variables
-.env
-docker-compose.yml
 logs/
 .scannerwork
