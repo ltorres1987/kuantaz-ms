@@ -48,11 +48,7 @@ docker-compose down
 # Ejecutar pruebas unitarias
 docker exec backend-service python -m pytest -rP
 
-# revision de logs generados por el microservicio
-  1. docker exec -ti backend-service /bin/bash
-  2. cd /usr/src/app/logs
-  3. ls
-  4. use '''cat''' para ver el log 
+
 ```
 
 
